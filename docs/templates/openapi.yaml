@@ -1,0 +1,97 @@
+# Modelo. Copie para docs/api/openapi.yaml.
+# Baseado em: OpenAPI Specification 3.2.0 (OpenAPI Initiative) e Problem Details for HTTP APIs (RFC 9457)
+# para as respostas de erro.
+#
+# Se a decisão for code-first (gerar o contrato a partir do código), este arquivo passa a ser gerado e serve só como referência.
+# A versão 3.2 é retrocompatível com a 3.1: se alguma ferramenta ainda não aceitar 3.2.0, troque para 3.1.1.
+# O caminho /transactions, o schema Transaction e o esquema de segurança bearerAuth são exemplos:
+# substitua pelos da sua API e ajuste a segurança conforme o ADR de autenticação.
+
+openapi: 3.2.0
+
+info:
+  title: API de Finanças Pessoais
+  version: 0.1.0
+  description: Contrato da API consumida pelo app mobile.
+
+servers:
+  - url: http://localhost:3000
+    description: Desenvolvimento local
+
+tags:
+  - name: transactions
+    description: Receitas, despesas e transferências
+
+paths:
+  /transactions:
+    get:
+      tags: [transactions]
+      summary: Lista as transações do usuário
+      operationId: listTransactions
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de transações
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+        '401':
+          $ref: '#/components/responses/Problem'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+
+  responses:
+    Problem:
+      description: Erro no formato Problem Details (RFC 9457)
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+
+  schemas:
+    Transaction:
+      type: object
+      required: [id, amountCents, type, occurredAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+        amountCents:
+          type: integer
+          description: Valor em centavos. Nunca use número com casas decimais para dinheiro.
+          minimum: 1
+        type:
+          type: string
+          enum: [income, expense, transfer]
+        occurredAt:
+          type: string
+          format: date-time
+
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: URI que identifica o tipo de problema
+        title:
+          type: string
+          description: Resumo curto do problema
+        status:
+          type: integer
+          description: Código HTTP
+        detail:
+          type: string
+          description: Explicação desta ocorrência
+        instance:
+          type: string
+          format: uri
+          description: URI desta ocorrência

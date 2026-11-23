@@ -43,9 +43,13 @@ financas/
 │   ├── release/           # política de privacidade, termos, textos das lojas, checklist
 │   ├── operations/        # SLOs, alertas, runbooks/ e postmortems/
 │   ├── retrospectives/    # retrospectivas de cada marco
+│   ├── templates/         # modelos de todos os documentos do guia
 │   └── glossary.md        # glossário do domínio
 ├── infra/                 # docker-compose, IaC
-├── .github/workflows/     # CI/CD
+├── .github/
+│   ├── workflows/         # CI/CD
+│   ├── ISSUE_TEMPLATE/    # modelos de issue (relato de bug)
+│   └── pull_request_template.md
 ├── .nvmrc
 ├── README.md              # visão geral e como rodar o projeto
 ├── package.json
@@ -82,3 +86,10 @@ financas/
 
 - Se o número de apps ou pacotes crescer a ponto de o Turborepo não bastar (avaliar Nx).
 - Se alguma parte precisar de ciclo de vida ou permissões de acesso separados (avaliar extrair para outro repositório).
+
+## Histórico de alterações
+
+| Data | Alteração |
+| --- | --- |
+| 2026-11-21 | Inclusão de `docs/templates/` na estrutura. Complementa a decisão, sem alterá-la. |
+| 2026-11-22 | Detalhamento de `.github/` (modelos de issue e de Pull Request). Complementa a decisão, sem alterá-la. |
