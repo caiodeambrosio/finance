@@ -127,8 +127,8 @@ Comece depois de concluir as fases 1 a 6. A primeira fatia é a primeira volta d
 
 **Entregável principal: o Documento de Visão.** É o primeiro documento técnico do projeto. Ele define o problema, para quem é o produto e os limites do escopo, e serve de base para os requisitos, a arquitetura e os ADRs. Ele não traz requisitos detalhados nem planejamento.
 
-- [ ] Documento de Visão escrito ([modelo](templates/documento-de-visao.md))
-- [ ] Documento revisado antes de começar os requisitos
+- [x] Documento de Visão escrito ([modelo](templates/documento-de-visao.md))
+- [x] Documento revisado antes de começar os requisitos
 
 📁 `docs/product/visao.md`. Se alguma seção crescer demais (personas, análise de concorrentes), mova para um arquivo próprio em `docs/product/` e coloque o link na visão.
 
